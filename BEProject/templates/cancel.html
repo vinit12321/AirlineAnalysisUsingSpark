@@ -1,0 +1,109 @@
+{% extends "home1.html" %}
+{% block content %}
+
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title></title>
+          <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js">
+    
+</script>
+<script src="https://code.highcharts.com/modules/exporting.js">
+    
+</script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+      
+      </head>
+      <body>
+     <div id="container" style="min-width: 350px; height: 650px; margin: 0 auto"></div>
+      <script language = "JavaScript">
+// Create the chart
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Cancelled Flights From 1987-2008'
+    },
+    subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Number of Flights Cancelled'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: "Cancelled Flights",
+            colorByPoint: true,
+            data: [
+                {% for yer,cancelf in set %}
+                {
+                    name: "{{yer}}",
+                    y: {{cancelf}},
+                    drilldown: "{{yer}}"
+                },
+                {% endfor %}
+            ]
+        }
+    ],
+    drilldown: {
+        series: [
+            {% for y in yer %}
+            {
+                name: "{{y}}",
+                id: "{{y}}",
+                data: [
+                    
+                     {% for res in carr %}
+                     {% if res[1] == y %}
+                     [
+                        "{{res[0]}}",
+                        {{res[2]}}
+                          ],
+                        {% endif %}
+                   
+                        {% endfor %}
+                   
+                    ]
+            },
+
+            {% endfor %}
+            
+        ]
+    }
+});
+
+</script>
+ </body>
+      </html>
+
+{% endblock content %}

@@ -1,0 +1,102 @@
+{% extends "home1.html" %}
+{% block content %}
+
+
+
+ <!DOCTYPE html>
+ <html>
+  <head>
+          <title>Perfomance</title>
+          <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js">
+    
+</script>
+<script src="https://code.highcharts.com/modules/exporting.js">
+    
+</script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+      
+      </head>
+      <body>
+     <div id="container" style="min-width: 350px; height: 650px; margin: 0 auto"></div>
+<script>
+	
+
+Highcharts.chart('container', {
+
+    title: {
+        text: 'Companies Perfomance wih repsect to Departure Delay'
+    },
+
+    yAxis: {
+        title: {
+            text: 'Departure Delay '
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+	xAxis: {
+        categories: [{% for y in year %}
+        	{{y}},
+
+        {% endfor %} ]
+    },
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            }
+      
+        }
+    },
+
+    series: [{
+        name: 'American Airlines',
+        data: [ {% for m in lis2 %}
+        	{{m}},
+        {% endfor %}]
+    }, {
+        name: 'United Airlines',
+        data: [{% for m in lis3 %}
+        	{{m}},
+        {% endfor %} ]
+    }, {
+        name: 'Alaska Airlines',
+        data: [{% for m in lis4 %}
+        	{{m}},
+        {% endfor %} ]
+    }, {
+        name: 'Delta Airlines',
+        data: [{% for m in lis5 %}
+        	{{m}},
+        {% endfor %}]
+    }], 
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+
+</script>
+
+{% endblock content %}

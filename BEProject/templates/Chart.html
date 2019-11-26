@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta charset="utf-8">   <title>Chart.js </title>      <!-- import plugin script -->   <script src="/static/Chart.min.js">
+  
+</script>
+<script src="/static/legend.js"> </script>
+<script src="/static/Chart.js"> </script>
+
+</head>
+<body>
+<h1>Flask Chart.js</h1>
+<!-- bar chart canvas element --><canvas id="chart" width="600" height="400"> hhd</canvas>
+    <div id="pieLegend"></div>
+
+<script> 
+   var pieData = [
+            {% for item,label,colors in set %} 
+                { 
+                    value: {{item}},
+                    label: "{{label}}",
+                    color : "{{colors}}"
+                },
+                {% endfor %} 
+                
+
+       ];
+
+       config = {
+      type: 'pie',
+      data: pieData,
+      labels: [
+          'Red',
+          'Orange',
+          'Yellow',
+          'Green',
+          'Blue'
+        ],
+      options: {
+        legend: {
+          display:true
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Line Chart'
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Month'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            }
+          }]
+        }
+      }
+    };
+  // ssget bar chart canvas<br />
+   var mychart = document.getElementById("chart").getContext("2d");
+  steps = 10
+   max = 10
+   // draw pie chart<br />
+   var pieChart= new Chart(document.getElementById("chart").getContext("2d"),config).Pie(pieData);
+
+legend(document.getElementById("pieLegend"), pieData, pieChart);
+
+
+
+
+
+
+
+var values = [1, 2, 3, 4, 5, 6, 7];
+var labels = ["A", "B", "C", "D", "E", "F", "G"];
+var colors = ["#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"];
+
+
+
+</script>
+<canvas id="chartt" width="100%" height="100%"></canvas>
+
+</body>
+</html>
