@@ -1,0 +1,30 @@
+{% extends "home1.html" %}
+{% block content %}
+
+
+        
+          <div class="table-responsive">
+           <table class="table">
+           	<tbody>
+           		{% for post in ctrsuccess %}
+
+           			<tr>
+           				<td> {{ post['cnt'] }} </td>
+           				<td> {{ post['Year'] }} </td>
+           				<td>  {{ post['UniqueCarrier'] }} </td>
+           			</tr>
+
+           		{% endfor %}
+
+
+
+
+
+           	</tbody>
+
+
+
+           </table>
+             
+    
+{% endblock content %}
