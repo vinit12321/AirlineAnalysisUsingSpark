@@ -1,0 +1,47 @@
+{% extends "home1.html" %}
+{% block content %}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Best Day in Week'
+    },
+    xAxis: {
+        categories: ['Monday','TuesDay','WednesDay','ThursDay','Friday','Saturday','Sunday']
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+
+    	
+
+
+        name: 'Delay',
+        data: [
+        	 {% for week,delay in set %}
+
+
+        {{delay}},
+                {% endfor %}
+
+        ]
+    }]
+});
+
+
+</script>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends "home1.html" %}
+{% block content %}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+	
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Trend in Flights delay'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [           
+		]
+    },
+    yAxis: {
+        title: {
+            text: 'Delay'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+        		{% for del in delay  %}
+         	{{del}} ,
+         {% endfor %}
+
+        ]
+    }]
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

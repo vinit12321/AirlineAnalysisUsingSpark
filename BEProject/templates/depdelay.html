@@ -1,0 +1,64 @@
+{% extends "home1.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+<body>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Departure Delay Year Wise'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+
+        	{% for y in year %}
+        	'{{y}}',
+
+        	{% endfor %}
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'Departure Delay in Mins'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'Year',
+        data: [
+        	{% for d in depdel %}
+        	{{d}},
+        	{% endfor %}
+        ]
+    }]
+});
+
+</script>
+{% endblock content %}
+</body>
+</html>
